@@ -1,0 +1,28 @@
+create database db_ecommerce;
+
+use db_ecommerce;
+
+create table tb_produtos (
+	id bigint auto_increment,
+    nome varchar(50) not null,
+    marca varchar(50) not null,
+    preco decimal(10,2) not null,
+    estoque integer not null,
+    primary key(id)
+);
+
+insert into tb_produtos(nome, marca, preco, estoque) values
+	("Mouse Gamer sem fio", "Dragon", 141.32, 5),
+    ("Xbox Serie S", "Microsoft", 2519.90, 3),
+    ("SSD 480GB", "Kingstone", 423.41, 8),
+    ("Placa de Vídeo Radeon RX 6700 XT", "Gigabyte", 5899.90, 7),
+    ("Headset Gamer Cloud Stinger", "HyperX", 329.29, 4),
+    ("Teclado Gamer K55", "Corsair", 270.47, 1),
+    ("HD Externo Portátil Elements", "WD", 355.18, 15),
+    ("Gabinete Gamer Carbide Series Delta", "Corsair", 941.65, 2);
+
+select * from tb_produtos where preco > 500.00;
+
+select * from tb_produtos where preco < 500.00;
+
+update tb_produtos set nome = "SSD 1TB", marca = "Kingston", preco = 739.45 where id = 3;

@@ -1,0 +1,25 @@
+create database db_rh;
+
+use db_rh;
+
+create table tb_funcionarios (
+	id bigint auto_increment,
+    nome varchar(30) not null,
+    idade int,
+    salario decimal(10,2),
+    cargo varchar(30),
+    primary key(id)
+);
+
+insert into tb_funcionarios (nome, idade, salario, cargo) values 
+	("João", 29, 3500.00, "Desenvolvedor Java Junior"),
+    ("José", 33, 5600.00, "Desenvolvedor Java Pleno"),
+    ("Maria", 24, 3800.00, "Design UX"),
+    ("Eduarda", 41, 7200.00, "Gerente de projetos"),
+    ("Mario", 19, 1700, "Estagiário");
+
+select * from tb_funcionarios where salario > 2000.00;
+
+select * from tb_funcionarios where salario < 2000.00;
+
+update tb_funcionarios set salario = 9600.00 where id = 4;
