@@ -1,0 +1,80 @@
+create database db_pizzaria_legal;
+
+use db_pizzaria_legal;
+
+create table tb_categoria (
+	id bigint auto_increment,
+    nome varchar(20) not null,
+    tipo varchar(20),
+    primary key(id)
+);
+
+create table tb_pizza (
+	id bigint auto_increment,
+    nome varchar(30) not null,
+    preco decimal (10,2) not null,
+    vegetariana boolean not null,
+    id_categoria bigint not null,
+    primary key(id),
+    foreign key(id_categoria) references tb_categoria(id)
+);
+
+insert into tb_categoria (nome, tipo) values
+	("Tradicional", "massa média"),
+    ("Especial", "borda recheada"),
+    ("Doce", "massa fina"),
+    ("Fogazza","pizza fechada"),
+    ("Saudável", "massa integral");
+    
+insert into tb_pizza (nome, preco, vegetariana, id_categoria) values
+	("Marguerita", 26.90, true, 1),
+    ("Calabresa", 31.90, false, 1),
+    ("Camarão", 65.90, false, 2),
+    ("4 Queijos", 49.90, true, 2),
+    ("Brigadeiro", 39.90, true, 3),
+    ("mussarela", 30.90, true, 4),
+    ("Carne", 34.90, false, 4),
+    ("Brócolis", 46.90, true, 5);
+
+select
+	tb_categoria.nome as categoria,
+    tb_pizza.nome as pizza,
+	tb_categoria.tipo,
+    tb_pizza.preco,
+    tb_pizza.vegetariana
+from tb_pizza
+inner join tb_categoria
+on tb_pizza.id_categoria = tb_categoria.id;
+
+select
+	tb_categoria.nome as categoria,
+    tb_pizza.nome as pizza,
+	tb_categoria.tipo,
+    tb_pizza.preco,
+    tb_pizza.vegetariana
+from tb_pizza
+inner join tb_categoria
+on tb_pizza.id_categoria = tb_categoria.id
+where tb_pizza.preco > 45;
+
+select
+	tb_categoria.nome as categoria,
+    tb_pizza.nome as pizza,
+	tb_categoria.tipo,
+    tb_pizza.preco,
+    tb_pizza.vegetariana
+from tb_pizza
+inner join tb_categoria
+on tb_pizza.id_categoria = tb_categoria.id
+where tb_pizza.preco between 29 and 60;
+
+select
+	tb_categoria.nome as categoria,
+    tb_pizza.nome as pizza,
+	tb_categoria.tipo,
+    tb_pizza.preco,
+    tb_pizza.vegetariana
+from tb_pizza
+inner join tb_categoria
+on tb_pizza.id_categoria = tb_categoria.id
+where tb_pizza.vegetariana = true;

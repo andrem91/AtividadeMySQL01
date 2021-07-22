@@ -1,0 +1,90 @@
+create database db_generation_game_online;
+
+use db_generation_game_online;
+
+create table tb_classe (
+	id bigint auto_increment,
+    nome varchar(50),
+    habilidade varchar(50),
+    arma varchar(50),
+    primary key(id)
+);
+
+create table tb_personagem (
+	id bigint auto_increment,
+    nome varchar(50) not null,
+    poder_de_ataque int not null,
+    poder_de_defesa int not null,
+    id_classe bigint,
+    primary key(id),
+    foreign key (id_classe) references tb_classe(id)
+);
+
+insert into tb_classe (nome, habilidade, arma) values
+	("Cavaleiro", "Perícia com espada", "Espada"),
+    ("Mago", "Bola de fogo", "Cajado"),
+    ("Arqueiro", "Flecha certeira", "Arco e flecha"),
+    ("Sacerdote", "Poder de cura", "Amuleto"),
+    ("Ninja", "Golpe sorrateiro", "Adaga");
+
+insert into tb_personagem (nome, poder_de_ataque, poder_de_defesa, id_classe) values
+	("Velol", 2700, 1730, 3),
+	("Dark Lord", 2300, 4400, 1),
+    ("Cand Fire", 1900, 1300, 2),
+    ("Shadow", 1350, 940, 5),
+    ("Javal", 1640, 1930, 1),
+    ("Jack Light", 930, 2240, 4),
+    ("Mokujin", 2340, 1490, 5),
+    ("Jim Burn", 1630, 890, 2);
+    
+select
+	tb_personagem.id,
+    tb_personagem.nome,
+    tb_personagem.poder_de_ataque,
+    tb_personagem.poder_de_defesa,
+    tb_classe.nome as classe,
+    tb_classe.habilidade,
+    tb_classe.arma
+from tb_personagem 
+inner join tb_classe
+on tb_personagem.id_classe = tb_classe.id
+where poder_de_ataque > 2000;
+
+select
+	tb_personagem.id,
+    tb_personagem.nome,
+    tb_personagem.poder_de_ataque,
+    tb_personagem.poder_de_defesa,
+    tb_classe.nome as classe,
+    tb_classe.habilidade,
+    tb_classe.arma
+from tb_personagem 
+inner join tb_classe
+on tb_personagem.id_classe = tb_classe.id
+where poder_de_defesa <= 2000 and poder_de_defesa >= 1000;
+
+select
+	tb_personagem.id,
+    tb_personagem.nome,
+    tb_personagem.poder_de_ataque,
+    tb_personagem.poder_de_defesa,
+    tb_classe.nome as classe,
+    tb_classe.habilidade,
+    tb_classe.arma
+from tb_personagem 
+inner join tb_classe
+on tb_personagem.id_classe = tb_classe.id
+where tb_personagem.nome like "%c%";
+
+select
+	tb_personagem.id,
+    tb_personagem.nome,
+    tb_personagem.poder_de_ataque,
+    tb_personagem.poder_de_defesa,
+    tb_classe.nome as classe,
+    tb_classe.habilidade,
+    tb_classe.arma
+from tb_personagem 
+inner join tb_classe
+on tb_personagem.id_classe = tb_classe.id
+where tb_classe.nome like "cavaleiro";
